@@ -1,13 +1,128 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.todo-container {
+  display: flex;
+  flex-direction: row;
+  min-width: 30vw;
+  justify-content: space-between;
+  /* align-items: center; */
+  gap: 1rem;
+  border: 2px solid red;
+  margin: 0.5rem;
+}
+
+.main-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+button {
+  padding: 0.2rem;
+  border-radius: 10px;
+}
+
+.card-container {
+  width: 15rem;
+  display: flex;
+  flex-direction: row;
+  border-radius: 10px;
+  border: 2px solid black;
+  
+}
+
+.left-section {
+
+}
+
+.home-container {
+  width: 80vw;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  
+}
+
+.product-card {
+ 
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  /* background-color: aqua; */
+}
+
+.product-card img {
+  height: 8rem;
+  width: 7rem;
+ 
+}
+.cart-container {
+  display: flex;
+  width: fit-content;
+  flex-wrap: wrap;
+  
+}
+
+.add-to-cart-btn {
+  width: 8rem;
+  margin: 1rem 3rem;
+}
+.cart-card {
+  display: flex;
+  flex-direction: row;
+  width: 22rem;
+  padding: 0.5rem;
+  /* border: 2px solid black; */
+  margin: 1rem;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px black;
+  /* margin: 0px; */
+}
+
+.cart-card img {
+  width: 10rem;
+  height: 10rem;
+  
+
+}
+
+.display-center {
+  display: flex;
+  justify-content: center;
+}
+
+.checkout-container {
+  width: 90vw;
+  /* height: rem; */
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-radius: 10px;
+  /* box-shadow: 10px 10px 5px black; */
+  background-color: lightseagreen;
+  transform: scale(1);
+}
+
+/*  product detail*/
+
+.detail-card {
+   display: flex;
+   flex-direction: row;
+   gap: 5rem;
+
+}
+
+.detail-card Button {
+  width: 10rem;
+}
+
+.detail-card-rightsection {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
