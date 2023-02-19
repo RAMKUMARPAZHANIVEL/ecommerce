@@ -28,7 +28,7 @@ app.post("/login", (req, res) => {
    const { email, password } = req.body;
    
    for(let i=0; i<userBioList.length; i++){
-    if(email == userBioList[i]?.email && password == userBioList[i]?.password){
+    if(email == userBioList[i][email] && password == userBioList[i][password]){
     return res.status(200).json({
         message : "logged In successfully",
         token : generate(),
