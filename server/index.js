@@ -52,7 +52,7 @@ app.get("/profile", (req, res) => {
            })
     }
     for(let i=0; i<userBioList.length; i++){
-        if(email == userBioList[i]?.email){
+        if(email == userBioList[i][email]){
     return res.status(200).json({
         userInfo : userBioList[i],
         imageUrl :"https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
