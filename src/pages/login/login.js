@@ -15,29 +15,34 @@ const Login = (props) => {
   const onFinish = (values) => {
     console.log("Success:", values);
     setUserDetail(values);
-    console.log(userDetail)
+    console.log({...userDetail})
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
- const fetchProfileData = async (token) => {
-  if(!token){
-    console.log("please login to see your profile")
-  }
+//  const fetchProfileData = async (token,email) => {
+//   if(!token){
+//     console.log("please login to see your profile")
+//   }
   
-    const response = await fetch("http://localhost:4500/profile",{
-      method: "GET",
-      headers: {
-        "authorization" : token
-      }
-    });
-    if(response.status == 200){
-      const data = await response.json();
-      console.log(data);
-      dispatch(setUserData(data))
-    }
+//     const response = await fetch("http://localhost:4500/profile",{
+//       method: "GET",
+//       headers : {
+//                 "authorization" : token,
+//                 "email" : email
+//                 }
+//     });
+//     // console.log(response);
+//     const data = await response.json();
+//       console.log(data);
+//     if(response.status == 200){
+//       const data = await response.json();
+//       console.log(data);
+//       dispatch(setUserData(data))
+
+//     }
    
- }
+//  }
   useEffect(() => {
     (async (_) => {
       try {
@@ -48,18 +53,24 @@ const Login = (props) => {
           },
           body: JSON.stringify(userDetail),
         });
-
+         console.log(response);
         if (response.status == 200) {
           const data = await response.json();
-          console.log(data.token);
+          console.log(data);
           console.log(props);
-          fetchProfileData(data.token);
           dispatch(setAuthorization(data.token));
+          // fetchProfileData(data.token,data.email);
+          dispatch(setUserData(data.userBio));
           navigate("/");
-          toast.success("loged in successfully");
+          toast("loged in successfully");
+        }
+        else{
+          console.log("please your correct credential");
+          toast("please your correct credential");
+
         }
       } catch (e) {
-        console.log(e);
+        console.log("Error",e);
       }
     })();
   }, [userDetail]);

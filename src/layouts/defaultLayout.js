@@ -6,13 +6,27 @@ import {
 import { Breadcrumb, Layout, Menu, theme, Button } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
-import Home from "../pages/home";
+import Home from "../pages/home/home";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { clearCartItems } from "../../store/actions/cart.action";
-import { revokeAuth } from "../../store/actions/auth.action";
+import { clearCartItems } from "../store/actions/cart.action";
+import { revokeAuth } from "../store/actions/auth.action";
+import { clearUserData } from "../store/actions/user.action";
+
+import { AudioOutlined } from '@ant-design/icons';
+import { Input, Space } from 'antd';
+
 const { Header, Content, Footer, Sider } = Layout;
+const { Search } = Input;
+const suffix = (
+  <AudioOutlined
+    style={{
+      fontSize: 16,
+      color: '#1890ff',
+    }}
+  />
+);
 
 const pages =[
     {
@@ -31,7 +45,7 @@ const pages =[
         onclick : () => {},
     },
     {
-        name : "Log In",
+        name : "Login",
         path : "/login",
         onclick : () => {},
     },
@@ -68,7 +82,7 @@ const DefaultLayout = (props) => {
   const generatedPages = () => {
      if(token){
       const filteredList = pages.filter((item) => {
-        return item.name != "Log In"
+        return (item.name != "sign up" && item.name != "Login")
       })
       return [...filteredList,{
         name : "Log out",
@@ -76,7 +90,8 @@ const DefaultLayout = (props) => {
         onClick : () => {
           console.log("clicked")
            dispatch(clearCartItems());
-           dispatch(revokeAuth())
+           dispatch(revokeAuth());
+           dispatch(clearUserData());
         },
        }]
      }
@@ -85,15 +100,29 @@ const DefaultLayout = (props) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  const onSearch = (value) => {
+    console.log(value);
+   
+  }
   return (
     <div>
       <Layout>
-        <Header className="header">
-          <div className="logo" />
-          <Menu
-            theme="dark"
+        {/* <Header className="header app-header">
+        
+        </Header> */}
+        <div className="header">
+          <div className="app-title">
+          <img src="https://cdn-icons-png.flaticon.com/128/871/871376.png" />
+            {/* <span>DoShop</span> */}
+            <h2>DoShop</h2>
+          </div>
+        <div>
+         <Menu
+            theme="light"
             mode="horizontal"
             defaultSelectedKeys={["0"]}
+            style={{width : "45rem"}}
             items= {generatedPages().map((item,key) => ({
               key,
               label:(
@@ -102,8 +131,14 @@ const DefaultLayout = (props) => {
                 </Link>
               ),
             }))}
+             
           />
-        </Header>
+         </div>
+          <div>
+          <Search placeholder="input search text" onSearch={onSearch} enterButton />
+   
+          </div>
+        </div>
         <Content
           style={{
             padding: "0 50px",
@@ -147,7 +182,7 @@ const DefaultLayout = (props) => {
             textAlign: "center",
           }}
         >
-          Ant Design ©2023 Created by Ant UED
+          Do Shop ©2023 Created by Ram & team
         </Footer>
       </Layout>
     </div>

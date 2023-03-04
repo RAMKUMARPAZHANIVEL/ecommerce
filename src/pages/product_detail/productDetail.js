@@ -11,6 +11,7 @@ const ProductDetail = (props) => {
   const[productDetail,setProductDetail] = useState({});
   const dispatch = useDispatch();
   const token = useSelector(store => store.auth.authorization);
+  const user = useSelector((store) => store.user.email);
   const cartList = useSelector(store => store.cart);
     const {detail } = props;
     const { id } = useParams();
@@ -39,7 +40,17 @@ const ProductDetail = (props) => {
     console.log("please login to add");
     toast.error("please login to add product");
    }else{
-    toast("Product added successfully")
+    toast("Product added successfully");
+    // toast.success('item increased', {
+    //   position: "top-right",
+    //   autoClose: 5000,
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: true,
+    //   progress: undefined,
+    //   theme: "light",
+    //   });
     dispatch(addItemToCart(product));
     const updatedItem = {item : {...product,quantity : 1}};
     console.log(updatedItem);
@@ -50,7 +61,7 @@ const ProductDetail = (props) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "user" : "ramkumar"
+          "user" : user
         },
         body: JSON.stringify(updatedItem),
       })
@@ -74,19 +85,32 @@ const ProductDetail = (props) => {
   return (
     <div>
         <Card >
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            />
             <div className='detail-card'>
                            
-               <img src={productDetail.image} style={{width:"15rem"}} />
-               <div className='detail-card-rightsection'>
-                <h2>{productDetail.title}</h2>
-                <p>{productDetail.description}</p>
-                <Button type="primary" onClick={() => addToCart(productDetail)} className="add-to-cart-btn" disabled={disableAddButton()}>Add to cart</Button>
-               </div>
-            </div>
+                           <img src={productDetail.image} style={{width:"15rem"}} />
+                           <div className='detail-card-rightsection'>
+                            <h2>{productDetail.title}</h2>
+                            <p>{productDetail.description}</p>
+                            <Button type="primary" onClick={() => addToCart(productDetail)} className="add-to-cart-btn" disabled={disableAddButton()}>Add to cart</Button>
+                           </div>
+                           </div>
+          <ToastContainer />
         </Card>
        
     </div>
   )
-}
+} 
 
 export default ProductDetail

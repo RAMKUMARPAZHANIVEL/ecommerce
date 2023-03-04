@@ -52,6 +52,8 @@ button {
 .product-card {
  
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  background-color: royalblue;
+  color: white;
   /* background-color: aqua; */
 }
 
@@ -60,35 +62,13 @@ button {
   width: 7rem;
  
 }
-.cart-container {
-  display: flex;
-  width: fit-content;
-  flex-wrap: wrap;
-  
-}
 
 .add-to-cart-btn {
   width: 8rem;
   margin: 1rem 3rem;
-}
-.cart-card {
-  display: flex;
-  flex-direction: row;
-  width: 22rem;
-  padding: 0.5rem;
-  /* border: 2px solid black; */
-  margin: 1rem;
-  border-radius: 10px;
-  box-shadow: 5px 5px 10px black;
-  /* margin: 0px; */
+  color: black;
 }
 
-.cart-card img {
-  width: 10rem;
-  height: 10rem;
-  
-
-}
 
 .display-center {
   display: flex;
@@ -125,4 +105,39 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+input {
+  color: white;
+  background-color: brown;
+}
+
+/* .app-header {
+  z-index: 1;
+  background-color: rgb(124, 89, 219) !important;
+  border: 2px solid rgb(0, 255, 68);
+  color: white;
+  border-radius: 20px;
+
+} */
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0rem 1rem;
+  flex-wrap: wrap;
+ 
+}
+
+.app-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+}
+
+.app-title img {
+  width: 4rem;
 }

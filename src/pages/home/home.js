@@ -49,7 +49,9 @@ const Home = () => {
           <div className='display-center'>
           <img src={elem.image} />
           </div>
-          {/* <Meta title={elem.title} description= {"price :" + " " + elem.price} /> */}
+          <h3>{elem?.title}</h3>
+          <p>{"price :" + " " + elem?.price}</p>
+          {/* <Meta title={elem?.title} description= {"price :" + " " + elem?.price} /> */}
           <Rate disabled defaultValue={elem.rating.rate} />
           <Button type="link" onClick={() => addToCart(elem)} className="add-to-cart-btn" >View more Detail</Button>
         </Card>

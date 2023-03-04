@@ -3,7 +3,8 @@ let initialState = [];
 const cartReducer = (state = initialState,action) => {
     switch(action.type){
         case "SET_CART_DATA" :
-            return []
+
+            return action.payload
         case "ADD_ITEMS_TO_CART" :
             const mergedItem = {...action.payload,quantity : 1}
              console.log([...state,mergedItem]);

@@ -1,16 +1,20 @@
+import "../cart/cart.css"
 import React, { useEffect, useState } from 'react';
 import {useDispatch} from 'react-redux'
 import { useSelector } from 'react-redux';
 import { Card, Rate } from 'antd';
 import { Button, Space } from 'antd';
-import { increaseQuantityInList,decreaseQuantityInList, removeItemFromCart } from '../../store/actions/cart.action';
+import { decreaseQuantityInList, removeItemFromCart } from '../../store/actions/cart.action';
+import { increaseQuantityInList } from '../../store/actions/cart.action';
+import { setCardData } from "../../store/actions/cart.action";
 
 const Cart = () => {
-  // const [cartList,setCartList] = useState([]);
+  const [cartItems,setCartItems] = useState([]);
   const cartList = useSelector(store => store.cart);
-  const user  = useSelector(store => store.user.name);
+  console.log(cartList.length)
+  const user  = useSelector(store => store.user?.email);
   const token = useSelector(store => store.auth.authorization)
-   console.log(user)
+   console.log(user,token)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,14 +24,15 @@ const Cart = () => {
         method : "GET",
         headers : {
           // "Content-Type": "application/json",
-          "user" : "ramkumar"
+          "user" : user
         },
        
       })
       const data =await response.json();
       console.log(data);
+      dispatch(setCardData(data.cart));
       // setCartList(data.cart);
-      // console.log(cartList.length);
+      console.log(cartList);
     
     })()
   },[])
@@ -37,7 +42,8 @@ const Cart = () => {
     dispatch(decreaseQuantityInList(data.id))
   }
   const increaseQuantity = (id) => {
-    dispatch(increaseQuantityInList(id))
+    dispatch(increaseQuantityInList(id));
+   
   }
 
   const removeItem = (id) => {
@@ -51,17 +57,20 @@ const Cart = () => {
   }
 
   const calcTotalprice = () => {
-    const totalPrice = cartList.reduce((acc,curVal) => {
-         return acc+curVal.price*curVal.quantity;
-    },(0));
-    return Math.floor(totalPrice);
+    // const totalPrice = cartList.reduce((acc,curVal) => {
+    //      return acc+curVal.price*curVal.quantity;
+    // },(0));
+    // return Math.floor(totalPrice);
   }
 
   const onCheckOut = () => {
  
   }
  if(!token){
-  return <h2>Please login to see your cart</h2>
+  return (<div style={{backgroundColor:"red"}}>
+           <h2 className="alert-user">Please login to see your cart</h2>
+
+         </div>)
  }  
 
   return (
@@ -71,17 +80,19 @@ const Cart = () => {
         return(
           <div className='cart-card' key={data.id}>
             
-              <div>
+              <div className="cart-card-left-section">
                 <h3>{data.title}</h3>
                 <p>Price - {data.price}</p>
+                <div> 
                 <Button type="primary"  onClick={() => {decreaseQuantity(data)}}>
-                   Decrease Quantity
+                   -
                 </Button>
-                <h3>{data.quantity}</h3>
+                <span style={{margin:"0px 1rem"}}>{data.quantity}</span>
                 <Button type="primary" primary onClick={()=> {increaseQuantity(data.id)}} >
-                   Increase Quantity
+                   +
                 </Button>
-                <Button type="primary" danger onClick={() => {removeItem(data.id)}}>
+                </div>
+                <Button type="primary" danger onClick={() => {removeItem(data.id)}} className="remove-btn">
                    Remove Item 
                 </Button>
               </div>
@@ -90,7 +101,9 @@ const Cart = () => {
            
           </div>
         )
-      })) :( <h2>Nothing in your cart</h2>)}
+      })) :( <div style={{backgroundColor:"red"}}>
+               <h2 className="alert-h2">Nothing in your cart</h2>
+             </div>)}
        <div className='checkout-container'>
         <h3>Total Items : {cartList.length}</h3>
         <h3>Price : INR {calcTotalprice()}</h3>

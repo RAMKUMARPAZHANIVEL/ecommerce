@@ -1,0 +1,12 @@
+.header {
+    width: 100vw;
+    height: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding: 1rem;
+    flex-wrap: wrap;
+    border: 2px solid red;
+    background-color: coral !important;
+}
